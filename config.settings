@@ -1,0 +1,31 @@
+#
+# These are the settings saved from running './Config'.
+# Note that it is not recommended to edit config.settings by hand!
+# Chances are you misunderstand what a variable does or what the
+# supported values are. You better just re-run the ./Config script
+# and answer appropriately there, to get a correct config.settings
+# file.
+#
+BASEPATH="/app/unrealircd"
+BINDIR="/app/unrealircd/bin"
+DATADIR="/app/unrealircd/data"
+CONFDIR="/app/unrealircd/conf"
+MODULESDIR="/app/unrealircd/modules"
+LOGDIR="/app/unrealircd/logs"
+CACHEDIR="/app/unrealircd/cache"
+DOCDIR="/app/unrealircd/doc"
+TMPDIR="/app/unrealircd/tmp"
+PRIVATELIBDIR="/app/unrealircd/lib"
+MAXCONNECTIONS_REQUEST="auto"
+NICKNAMEHISTORYLENGTH="2000"
+GEOIP="classic"
+DEFPERM="0600"
+SSLDIR=""
+REMOTEINC="1"
+CURLDIR="/app/unrealircd-6.1.6/extras/curl"
+NOOPEROVERRIDE=""
+OPEROVERRIDEVERIFY=""
+GENCERTIFICATE=""
+SANITIZER=""
+EXTRAPARA=""
+ADVANCED=""

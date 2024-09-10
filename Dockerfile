@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-ENV unrealircd_version="6.1.6"
+ENV unrealircd_version="6.1.7.2"
 
 RUN mkdir -p /app/unrealircd && \
   apt-get update && \
@@ -21,7 +21,14 @@ WORKDIR /app/unrealircd
 
 CMD [ "bin/unrealircd", "-f", "./unrealircd.conf", "-F" ]
 
+VOLUME /app/unrealircd/conf
+VOLUME /tls
+VOLUME /app/unrealircd/logs
+
 EXPOSE 6667/tcp
 EXPOSE 6668/tcp
 EXPOSE 6697/tcp
 EXPOSE 7001/tcp
+EXPOSE 8443/tcp
+EXPOSE 8000/tcp
+EXPOSE 8600/tcp

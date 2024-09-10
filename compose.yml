@@ -1,0 +1,12 @@
+services:
+  ircd:
+    image: quay.io/kareiva/unrealircd:6.1.7.2
+    ports:
+      - 6667:6667
+      - 6668:6668
+      - 6697:6697
+      - 7001:7001
+    volumes:
+      - ./unrealircd.conf:/app/unrealircd/conf/unrealircd.conf
+      - ./tls:/app/unrealircd/conf/tls/
+      - ./data:/app/unrealircd/data/

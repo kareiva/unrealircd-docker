@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 
-ENV unrealircd_version="6.1.7.2"
+ENV unrealircd_version="6.1.8"
 
 RUN mkdir -p /app/unrealircd && \
   apt-get update && \

@@ -1,6 +1,6 @@
-FROM ubuntu:latest
+FROM ubuntu:rolling
 
-ENV unrealircd_version="6.1.8"
+ENV unrealircd_version="6.1.9.1"
 
 RUN mkdir -p /app/unrealircd && \
   apt-get update && \

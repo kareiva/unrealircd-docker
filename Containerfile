@@ -6,11 +6,11 @@ RUN mkdir -p /app/unrealircd && \
   rpm -i https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
   /usr/bin/crb enable && \
   dnf install -y wget make file binutils gdb cmake-filesystem openssl-devel pcre2-devel libcurl-devel \
-    automake gcc gcc-c++ diffutils pkgconf-pkg-config pcre2-devel libargon2-devel libsodium-devel && \
+    automake gcc gcc-c++ diffutils pkgconf-pkg-config pcre2-devel libargon2-devel libsodium-devel python3-pip && \
   rpm -i https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/c-ares-1.19.1-2.el9.x86_64.rpm \
     https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/c-ares-devel-1.19.1-2.el9.x86_64.rpm && \
   wget -O /app/unrealircd.tar.gz https://www.unrealircd.org/downloads/unrealircd-${unrealircd_version}.tar.gz && \
-  cd /app/ && tar xfvz unrealircd.tar.gz
+  pip install certbot && cd /app/ && tar xfvz unrealircd.tar.gz
 
 COPY config.settings /app/unrealircd-${unrealircd_version}/
 

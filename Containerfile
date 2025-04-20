@@ -1,17 +1,16 @@
-# FROM registry.access.redhat.com/ubi9/ubi:9.5
 FROM quay.io/centos/centos:latest
 
 ENV unrealircd_version="6.1.10"
 
 # Generic preparation layer
-RUN rpm -i https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm && \
-  dnf install -y 'dnf-command(config-manager)' && /usr/bin/crb enable && dnf upgrade -y --refresh
+RUN rpm -i https://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm && \
+  dnf install -y 'dnf-command(config-manager)' && /usr/bin/crb enable && dnf upgrade -y --refresh && \
+  dnf clean all
 
 # Build dependency layer
 RUN dnf install -y wget make file binutils gdb cmake-filesystem openssl-devel pcre2-devel libcurl-devel \
-    automake gcc gcc-c++ diffutils pkgconf-pkg-config openssl pcre2-devel libargon2-devel libsodium-devel && \
-  rpm -i https://mirror.stream.centos.org/9-stream/BaseOS/x86_64/os/Packages/c-ares-1.19.1-2.el9.x86_64.rpm \
-    https://mirror.stream.centos.org/9-stream/AppStream/x86_64/os/Packages/c-ares-devel-1.19.1-2.el9.x86_64.rpm
+    automake gcc gcc-c++ diffutils pkgconf-pkg-config openssl pcre2-devel libargon2-devel libsodium-devel \
+    c-ares c-ares-devel && dnf clean all
 
 # Unrealircd layer
 RUN mkdir -p /app/unrealircd && \
@@ -19,7 +18,7 @@ RUN mkdir -p /app/unrealircd && \
   cd /app/ && tar xfvz unrealircd.tar.gz
 
 # Certbot layer
-RUN dnf install -y python3-pip && pip install certbot
+RUN dnf install -y python3-pip && dnf clean all && pip install --no-cache-dir certbot
 
 COPY config.settings /app/unrealircd-${unrealircd_version}/
 

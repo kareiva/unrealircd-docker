@@ -5,7 +5,7 @@ A container image, readily available for use.
 
 ## Download
 
-    podman pull quay.io/kareiva/unrealircd:6.1.8
+    podman pull quay.io/kareiva/unrealircd:latest
 
 
 ## Use
@@ -14,7 +14,7 @@ Create a `compose.yaml`:
 
 	services:
 	  ircd:
-	    image: quay.io/kareiva/unrealircd:6.1.8
+	    image: quay.io/kareiva/unrealircd:latest
 	    ports:
 	      - 6667:6667
 	      - 6668:6668
@@ -27,3 +27,8 @@ Create a `compose.yaml`:
 Run:
 
     docker compose up -d
+
+
+## Resources
+
+https://quay.io/repository/kareiva/unrealircd

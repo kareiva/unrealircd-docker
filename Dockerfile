@@ -1,11 +1,17 @@
 FROM ubuntu:rolling
 
-ENV unrealircd_version="6.1.9.1"
+ENV unrealircd_version="6.1.10"
 
-RUN mkdir -p /app/unrealircd && \
-  apt-get update && \
+# Dependency layer
+RUN apt-get update && \
   apt-get install -y wget make binutils build-essential pkg-config gdb libssl-dev \
-  libpcre2-dev libargon2-dev libsodium-dev libc-ares-dev libcurl4-openssl-dev && \
+  libpcre2-dev libargon2-dev libsodium-dev libc-ares-dev libcurl4-openssl-dev
+
+# Certbot layer for macvlan containers
+RUN apt install -y python3-pip && pip install certbot --break-system-packages
+
+# Unrealircd layer
+RUN mkdir -p /app/unrealircd && \
   wget -O /app/unrealircd.tar.gz https://www.unrealircd.org/downloads/unrealircd-${unrealircd_version}.tar.gz && \
   cd /app/ && tar xfvz unrealircd.tar.gz
 
@@ -22,7 +28,7 @@ WORKDIR /app/unrealircd
 CMD [ "bin/unrealircd", "-f", "./unrealircd.conf", "-F" ]
 
 VOLUME /app/unrealircd/conf
-VOLUME /tls
+VOLUME /app/unrealircd/conf/tls
 VOLUME /app/unrealircd/logs
 
 EXPOSE 6667/tcp

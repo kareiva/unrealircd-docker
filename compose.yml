@@ -1,12 +1,18 @@
 services:
   ircd:
-    image: quay.io/kareiva/unrealircd:6.1.7.2
+    image: quay.io/kareiva/unrealircd:latest
+    command:
+      - "bin/unrealircd"
+      - "-f"
+      - "../conf.d/unrealircd.conf"
+      - "-F"
     ports:
       - 6667:6667
       - 6668:6668
-      - 6697:6697
+      - 5900:5900
       - 7001:7001
+      - 8600:8600
     volumes:
-      - ./unrealircd.conf:/app/unrealircd/conf/unrealircd.conf
+      - ./conf.d:/app/unrealircd/conf.d/
       - ./tls:/app/unrealircd/conf/tls/
       - ./data:/app/unrealircd/data/

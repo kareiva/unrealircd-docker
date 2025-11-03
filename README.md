@@ -1,3 +1,5 @@
+![container build status](https://quay.io/repository/kareiva/unrealircd/status)
+
 # unrealircd-docker
 
 A container image, readily available for use.
@@ -26,9 +28,13 @@ Create a `compose.yaml`:
 
 Run:
 
-    docker compose up -d
+    podman compose up -d
 
+To support dynamic configuration rehashing, mount the unrealircd.conf
+file through a separate folder, i.e. `conf.d` or similar path. In such
+setup, the changes to the unrealircd.conf file on the host will be
+immediately reflected inside the container.
 
 ## Resources
 
-https://quay.io/repository/kareiva/unrealircd
+https://quay.io/repository/kareiva/unrealircd?tab=tags

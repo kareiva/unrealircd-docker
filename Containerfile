@@ -1,6 +1,8 @@
 FROM quay.io/centos/centos:latest
 
-ENV unrealircd_version="6.2.0.2"
+ENV unrealircd_version="6.2.1"
+
+RUN echo fastestmirror=true >> /etc/dnf/dnf.conf
 
 # Generic preparation layer
 RUN rpm -i https://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm && \

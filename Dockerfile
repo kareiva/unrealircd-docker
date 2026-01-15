@@ -1,6 +1,6 @@
 FROM quay.io/centos/centos:latest
 
-ENV unrealircd_version="6.2.1"
+ENV unrealircd_version="6.2.2"
 
 RUN echo fastestmirror=true >> /etc/dnf/dnf.conf
 

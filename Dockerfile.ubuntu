@@ -1,6 +1,6 @@
 FROM ubuntu:rolling
 
-ENV unrealircd_version="6.1.10"
+ENV unrealircd_version="6.2.2"
 
 # Dependency layer
 RUN apt-get update && \

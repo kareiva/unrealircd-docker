@@ -2,6 +2,9 @@ FROM quay.io/centos/centos:latest
 
 ENV unrealircd_version="6.2.2"
 
+LABEL org.unrealircd.version="${unrealircd_version}" \
+      maintainer="simonas@5grupe.lt"
+
 RUN echo fastestmirror=true >> /etc/dnf/dnf.conf
 
 # Generic preparation layer

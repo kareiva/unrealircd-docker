@@ -17,18 +17,18 @@ RUN dnf install -y wget make file binutils gdb cmake-filesystem openssl-devel pc
 # Unrealircd layer
 RUN mkdir -p /app/unrealircd && \
   wget -O /app/unrealircd.tar.gz https://www.unrealircd.org/downloads/unrealircd-${unrealircd_version}.tar.gz && \
-  cd /app/ && tar xfvz unrealircd.tar.gz
+  cd /app/ && tar xfvz unrealircd.tar.gz && rm unrealircd.tar.gz
 
 # Certbot layer
 RUN dnf install -y python3-pip && dnf clean all && pip install --no-cache-dir certbot
 
 COPY config.settings /app/unrealircd-${unrealircd_version}/
 
-RUN cd /app/unrealircd-${unrealircd_version}/ && ./Config -quick && make && make install
-
-RUN useradd -M irc && usermod -s /bin/bash irc && chown irc:irc -R /app/unrealircd 
+RUN useradd -M irc && usermod -s /bin/bash irc && chown irc:irc -R /app/unrealircd && chown -R irc:irc /app/unrealircd-${unrealircd_version}/
 
 USER irc
+
+RUN cd /app/unrealircd-${unrealircd_version}/ && ./Config -quick && make && make install
 
 WORKDIR /app/unrealircd
 

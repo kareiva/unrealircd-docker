@@ -1,14 +1,8 @@
 FROM quay.io/centos/centos:latest
 
-ENV unrealircd_version="6.2.4"
-
-LABEL org.unrealircd.version="${unrealircd_version}" \
-      maintainer="simonas@5grupe.lt"
-
-RUN echo fastestmirror=true >> /etc/dnf/dnf.conf
-
 # Generic preparation layer
-RUN rpm -i https://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm && \
+RUN echo fastestmirror=true >> /etc/dnf/dnf.conf && \
+  rpm -i https://dl.fedoraproject.org/pub/epel/epel-release-latest-10.noarch.rpm && \
   dnf install -y 'dnf-command(config-manager)' && /usr/bin/crb enable && dnf upgrade -y --refresh && \
   dnf clean all
 
@@ -17,13 +11,15 @@ RUN dnf install -y wget make file binutils gdb cmake-filesystem openssl-devel pc
     automake gcc gcc-c++ diffutils pkgconf-pkg-config openssl pcre2-devel libargon2-devel libsodium-devel \
     c-ares c-ares-devel util-linux-core procps-ng && dnf clean all
 
+# Certbot layer
+RUN dnf install -y python3-pip && dnf clean all && pip install --no-cache-dir certbot
+
 # Unrealircd layer
+ARG unrealircd_version="6.2.4"
+
 RUN mkdir -p /app/unrealircd && \
   wget -O /app/unrealircd.tar.gz https://www.unrealircd.org/downloads/unrealircd-${unrealircd_version}.tar.gz && \
   cd /app/ && tar xfvz unrealircd.tar.gz && rm unrealircd.tar.gz
-
-# Certbot layer
-RUN dnf install -y python3-pip && dnf clean all && pip install --no-cache-dir certbot
 
 COPY config.settings /app/unrealircd-${unrealircd_version}/
 
@@ -48,3 +44,7 @@ EXPOSE 7001/tcp
 EXPOSE 8443/tcp
 EXPOSE 8000/tcp
 EXPOSE 8600/tcp
+
+LABEL org.unrealircd.version="${unrealircd_version}" \
+      maintainer="simonas@5grupe.lt"
+

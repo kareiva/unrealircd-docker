@@ -1,6 +1,6 @@
 FROM quay.io/centos/centos:latest
 
-ENV unrealircd_version="6.2.3"
+ENV unrealircd_version="6.2.4"
 
 LABEL org.unrealircd.version="${unrealircd_version}" \
       maintainer="simonas@5grupe.lt"

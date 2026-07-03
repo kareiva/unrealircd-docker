@@ -15,7 +15,7 @@ RUN dnf install -y wget make file binutils gdb cmake-filesystem openssl-devel pc
 RUN dnf install -y python3-pip && dnf clean all && pip install --no-cache-dir certbot
 
 # Unrealircd layer
-ARG unrealircd_version="6.2.4"
+ARG unrealircd_version="6.2.6"
 
 RUN mkdir -p /app/unrealircd && \
   wget -O /app/unrealircd.tar.gz https://www.unrealircd.org/downloads/unrealircd-${unrealircd_version}.tar.gz && \
